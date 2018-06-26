@@ -9,21 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  margin: {
-    margin: theme.spacing.unit,
-  },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 3,
-  },
-  textField: {
-    flexBasis: 200,
-  },
-});
+const styles = () => ({});
 
 class Login extends Component {
   state = {
