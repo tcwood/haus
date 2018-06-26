@@ -50,6 +50,9 @@ const userPass = ({
     <Button size="large" variant="contained" color="primary">
       Log in
     </Button>
+    <Button size="large" variant="contained" color="primary">
+      Sign Up
+    </Button>
   </div>
 );
 
