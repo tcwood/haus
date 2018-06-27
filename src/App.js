@@ -3,10 +3,19 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import Create from './create/create';
 import Home from './home/home';
 import Login from './login/login';
+import PrivateRoute from './shared/privateRoute';
 import View from './view/view';
 import './App.css';
 
 class App extends Component {
+  state = {
+    isLoggedIn: false,
+  };
+  setLoginState = isLoggedIn => {
+    this.setState({
+      isLoggedIn,
+    });
+  };
   render() {
     return (
       <Router>
@@ -26,9 +35,22 @@ class App extends Component {
             </li>
           </ul>
           <Route exact path="/" component={Home} />
-          <Route path="/create" component={Create} />
-          <Route path="/view" component={View} />
-          <Route path="/login" component={Login} />
+          <PrivateRoute
+            path="/create"
+            isLoggedIn={this.state.isLoggedIn}
+            component={Create}
+          />
+          <PrivateRoute
+            path="/view"
+            isLoggedIn={this.state.isLoggedIn}
+            component={View}
+          />
+          <Route
+            path="/login"
+            render={props => (
+              <Login setLoginState={this.setLoginState} {...props} />
+            )}
+          />
         </div>
       </Router>
     );

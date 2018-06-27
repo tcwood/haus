@@ -21,7 +21,6 @@ app.get('/api/feedback', (req, res) => {
 
 app.post('/api/login', (req, res) => {
   const { userName, password } = req.body;
-  console.log('password in server.js:', password);
   if (!users.hasOwnProperty(userName)) {
     res.send({ okay: false, message: `User doesn't exist` });
   } else if (users[userName].password !== password) {
@@ -33,7 +32,6 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/signup', (req, res) => {
   const { userName, password } = req.body;
-  console.log('password in server.js:', password);
   if (users.hasOwnProperty(userName)) {
     res.send({ okay: false, message: 'User already exists' });
   } else {

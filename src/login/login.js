@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import sha1 from 'sha1';
 import UserPass from '../shared/userPass';
 
+const initialState = {
+  password: '',
+  showPassword: false,
+  userName: '',
+};
 class Login extends Component {
-  state = {
-    password: '',
-    showPassword: false,
-    userName: '',
+  state = initialState;
+
+  resetInitialState = () => {
+    this.setState(initialState);
   };
 
   handleChange = prop => event => {
@@ -21,17 +26,33 @@ class Login extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  onSignup = () => {
-    this.sendUserInfo('signup');
+  onSignup = async () => {
+    const res = await this.sendUserInfo('signup');
+    if (res.okay) {
+      this.props.setLoginState(true);
+      this.props.history.push('/view');
+    } else {
+      console.log('couldnt signup', res);
+    }
+    this.resetInitialState();
   };
 
-  onLogin = () => {
-    this.sendUserInfo('login');
+  onLogin = async () => {
+    const res = await this.sendUserInfo('login');
+    console.log('res', res);
+    if (res.okay) {
+      this.props.setLoginState(true);
+      this.props.history.push('/view');
+    } else {
+      // TODO: trigger error modal here
+      console.log('couldnt log in', res);
+    }
+    this.resetInitialState();
   };
 
   sendUserInfo = async endpoint => {
     const { userName, password } = this.state;
-    const hashedPassword = sha1(password);
+    const hashedPassword = sha1(password + 'salty');
     const res = await fetch(`/api/${endpoint}`, {
       method: 'POST',
       headers: {
@@ -43,8 +64,7 @@ class Login extends Component {
         password: hashedPassword,
       }),
     });
-    const resJSON = await res.json();
-    console.log('res in login.js:', resJSON);
+    return await res.json();
   };
 
   render() {
