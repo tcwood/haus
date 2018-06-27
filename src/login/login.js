@@ -22,13 +22,17 @@ class Login extends Component {
   };
 
   onSignup = () => {
-    this.sendNewUserInfo();
+    this.sendUserInfo('signup');
   };
 
-  sendNewUserInfo = async () => {
+  onLogin = () => {
+    this.sendUserInfo('login');
+  };
+
+  sendUserInfo = async endpoint => {
     const { userName, password } = this.state;
     const hashedPassword = sha1(password);
-    const res = await fetch('/api/signup', {
+    const res = await fetch(`/api/${endpoint}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json, text/plain, */*',
@@ -48,6 +52,7 @@ class Login extends Component {
       <UserPass
         handleChange={this.handleChange}
         handleClickShowPassword={this.handleClickShowPassword}
+        onLogin={this.onLogin}
         onSignup={this.onSignup}
         password={this.state.password}
         showPassword={this.state.showPassword}

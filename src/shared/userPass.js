@@ -19,6 +19,7 @@ const styles = () => ({});
 const userPass = ({
   handleChange,
   handleClickShowPassword,
+  onLogin,
   onSignup,
   password,
   showPassword,
@@ -49,7 +50,7 @@ const userPass = ({
         }
       />
     </FormControl>
-    <Button size="large" variant="contained" color="primary">
+    <Button onClick={onLogin} size="large" variant="contained" color="primary">
       Log in
     </Button>
     <Button onClick={onSignup} size="large" variant="contained" color="primary">
@@ -63,6 +64,7 @@ const { bool, func, string } = PropTypes;
 userPass.propTypes = {
   handleChange: func.isRequired,
   handleClickShowPassword: func.isRequired,
+  onLogin: func.isRequired,
   onSignup: func.isRequired,
   password: string.isRequired,
   showPassword: bool.isRequired,
