@@ -32,9 +32,10 @@ class Login extends Component {
       this.props.setLoginState(true);
       this.props.history.push('/view');
     } else {
+      // TODO: trigger error modal here
       console.log('couldnt signup', res);
+      this.resetInitialState();
     }
-    this.resetInitialState();
   };
 
   onLogin = async () => {
@@ -46,8 +47,8 @@ class Login extends Component {
     } else {
       // TODO: trigger error modal here
       console.log('couldnt log in', res);
+      this.resetInitialState();
     }
-    this.resetInitialState();
   };
 
   sendUserInfo = async endpoint => {

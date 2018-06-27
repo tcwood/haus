@@ -1,8 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-usersId = 0;
-users = {};
+let usersId = 0;
+let users = {};
+
+let feedbackId = 0;
+let feedback = {};
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -39,6 +42,18 @@ app.post('/api/signup', (req, res) => {
     usersId++;
     res.send({ okay: true, message: 'User created' });
   }
+});
+
+app.post('/api/create', (req, res) => {
+  const { userName, feedback } = req.body;
+  console.log('feedback in server.js:', feedback);
+  if (feedback.hasOwnProperty(userName)) {
+    feedback[userName].push(feedback);
+  } else {
+    feedback[userName] = [feedback];
+  }
+
+  res.send({ okay: true, message: 'Feedback created' });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
