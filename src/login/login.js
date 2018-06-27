@@ -39,7 +39,8 @@ class Login extends Component {
         password: hashedPassword,
       }),
     });
-    const string = await res.json();
+    const resJSON = await res.json();
+    console.log('res in login.js:', resJSON);
   };
 
   render() {

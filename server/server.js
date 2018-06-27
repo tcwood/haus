@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+usersId = 0;
+users = {};
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -17,8 +20,14 @@ app.get('/api/feedback', (req, res) => {
 });
 
 app.post('/api/signup', (req, res) => {
-  console.log('req', req.body);
-  res.send({ here: 'hi' });
+  const { userName, password } = req.body;
+  if (users.hasOwnProperty(userName)) {
+    res.send({ okay: false, message: 'User already exists' });
+  } else {
+    users[userName] = { password, id: usersId };
+    usersId++;
+    res.send({ okay: true, message: 'User created' });
+  }
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
