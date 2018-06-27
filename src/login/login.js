@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import sha1 from 'sha1';
 import UserPass from '../shared/userPass';
 
 class Login extends Component {
@@ -26,6 +27,7 @@ class Login extends Component {
 
   sendNewUserInfo = async () => {
     const { userName, password } = this.state;
+    const hashedPassword = sha1(password);
     const res = await fetch('/api/signup', {
       method: 'POST',
       headers: {
@@ -34,7 +36,7 @@ class Login extends Component {
       },
       body: JSON.stringify({
         userName,
-        password,
+        password: hashedPassword,
       }),
     });
     const string = await res.json();
