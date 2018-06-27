@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import fakeData from './sampleData.json';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,18 +8,18 @@ const styles = {};
 
 class View extends Component {
   state = {
-    data: '',
+    feedback: null,
   };
+
   componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ data: res.express }))
+    this.fetchFeedback()
+      .then(({ feedback }) => this.setState({ feedback }))
       .catch(err => console.log('Error!', err));
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/home');
+  fetchFeedback = async () => {
+    const response = await fetch('/api/feedback');
     const body = await response.json();
-
     if (response.status !== 200) {
       throw Error('Yikess! something went wrong>>>', body.message);
     }
@@ -31,20 +30,20 @@ class View extends Component {
     return (
       <div>
         <h1>View</h1>
-        <p>{this.state.data}</p>
-        {fakeData.map(({ date, feedback, id, userName }) => {
-          return (
-            <Card key={id}>
-              <CardContent>
-                <Typography color="textSecondary">{userName}</Typography>
-                <Typography color="textSecondary" paragraph={true}>
-                  {feedback}
-                </Typography>
-                <Typography color="textSecondary">{date}</Typography>
-              </CardContent>
-            </Card>
-          );
-        })}
+        {this.state.feedback &&
+          this.state.feedback.map(({ date, feedback, id, userName }) => {
+            return (
+              <Card key={id}>
+                <CardContent>
+                  <Typography color="textSecondary">{userName}</Typography>
+                  <Typography color="textSecondary" paragraph={true}>
+                    {feedback}
+                  </Typography>
+                  <Typography color="textSecondary">{date}</Typography>
+                </CardContent>
+              </Card>
+            );
+          })}
       </div>
     );
   }
