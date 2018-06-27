@@ -18,6 +18,7 @@ const styles = () => ({});
 const userPass = ({
   handleChange,
   handleClickShowPassword,
+  onSignup,
   password,
   showPassword,
   userName,
@@ -50,7 +51,7 @@ const userPass = ({
     <Button size="large" variant="contained" color="primary">
       Log in
     </Button>
-    <Button size="large" variant="contained" color="primary">
+    <Button onClick={onSignup} size="large" variant="contained" color="primary">
       Sign Up
     </Button>
   </div>

@@ -1,7 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(bodyParser.json());
 
 const sampleData = require('./sampleData.json');
 
@@ -11,6 +14,11 @@ app.get('/api/home', (req, res) => {
 
 app.get('/api/feedback', (req, res) => {
   res.send({ feedback: sampleData });
+});
+
+app.post('/api/signup', (req, res) => {
+  console.log('req', req.body);
+  res.send({ here: 'hi' });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
