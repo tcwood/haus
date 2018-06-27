@@ -38,7 +38,6 @@ class Login extends Component {
       }),
     });
     const string = await res.json();
-    console.log('string in login.js:', string);
   };
 
   render() {

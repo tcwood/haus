@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -56,5 +57,16 @@ const userPass = ({
     </Button>
   </div>
 );
+
+const { bool, func, string } = PropTypes;
+
+userPass.propTypes = {
+  handleChange: func.isRequired,
+  handleClickShowPassword: func.isRequired,
+  onSignup: func.isRequired,
+  password: string.isRequired,
+  showPassword: bool.isRequired,
+  userName: string.isRequired,
+};
 
 export default withStyles(styles)(userPass);
