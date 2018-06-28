@@ -2,6 +2,18 @@
 
 This app is deployed at https://haus-project.herokuapp.com/
 
+## Project Functionality
+
+- People can signup to create a new user or login with an existing user
+  - There is some basic functionality on assuring a user name doesn't exist on signup, that the credentials are correct, etc.
+- Users can post general feedback via a text form
+- Users can see the feedback they've previously posted in the history tab
+
+## Project Structure
+
+- client side code is located within the src folder
+- server side code is located within the server folder
+
 ## Developing
 
 - Clone the project locally
