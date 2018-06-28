@@ -10,15 +10,15 @@ const styles = () => ({
     width: '70%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 20,
   },
   feedback: {
-    height: '60%',
     width: '80%',
   },
-  button: {},
+  button: {
+    marginTop: 60,
+  },
 });
 
 class Create extends Component {
@@ -59,6 +59,7 @@ class Create extends Component {
           margin="normal"
         />
         <Button
+          className={classes.button}
           onClick={this.submitFeedback}
           variant="contained"
           color="primary"

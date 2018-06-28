@@ -1,5 +1,8 @@
 module.exports = (req, res, feedback) => {
   const { userName } = req.query;
-  const userFeedback = feedback[userName];
+  let userFeedback = [];
+  if (feedback.hasOwnProperty(userName)) {
+    userFeedback = feedback[userName];
+  }
   res.send({ okay: true, feedback: userFeedback });
 };

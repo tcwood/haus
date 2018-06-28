@@ -4,9 +4,19 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 class Nav extends Component {
-  state = {
-    value: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+    };
+    props.history.listen(({ pathname }) => {
+      if (pathname === '/create') {
+        this.setActiveTab(0);
+      } else if (pathname === '/history') {
+        this.setActiveTab(1);
+      }
+    });
+  }
   handleChange = (event, value) => {
     const { history, setLoginState } = this.props;
     this.setState({ value });
@@ -17,6 +27,12 @@ class Nav extends Component {
     } else if (value === 2) {
       setLoginState(false);
     }
+  };
+  setActiveTab = value => {
+    console.log(' in nav.js:');
+    this.setState({
+      value,
+    });
   };
   render() {
     return (

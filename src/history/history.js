@@ -31,7 +31,6 @@ class History extends Component {
   render() {
     return (
       <div>
-        <h1>Feedback History</h1>
         {this.state.feedback.length === 0 ? (
           <Card>
             <CardContent>
