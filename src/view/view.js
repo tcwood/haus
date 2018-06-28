@@ -31,13 +31,21 @@ class View extends Component {
   render() {
     return (
       <div>
-        <h1>View</h1>
-        {this.state.feedback &&
+        <h1>Feedback History</h1>
+        {this.state.feedback.length === 0 ? (
+          <Card>
+            <CardContent>
+              <Typography color="textSecondary">
+                Looks like you haven't submitted any feedback yet. Get started
+                by clicking the create button.
+              </Typography>
+            </CardContent>
+          </Card>
+        ) : (
           this.state.feedback.map(({ date, text, id, userName }) => {
             return (
               <Card key={id}>
                 <CardContent>
-                  <Typography color="textSecondary">{userName}</Typography>
                   <Typography color="textSecondary" paragraph={true}>
                     {text}
                   </Typography>
@@ -47,7 +55,8 @@ class View extends Component {
                 </CardContent>
               </Card>
             );
-          })}
+          })
+        )}
       </div>
     );
   }
