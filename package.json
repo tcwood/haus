@@ -5,18 +5,20 @@
   "proxy": "http://localhost:5000/",
   "scripts": {
     "client": "react-scripts start",
+    "start-dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "react-scripts build",
-    "heroku-postbuild": "cd client && yarn &&",
+    "heroku-postbuild": "yarn && yarn build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
-    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.3",
     "@material-ui/icons": "^1.1.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
