@@ -29,31 +29,38 @@ app.post('/api/login', (req, res) => {
   } else if (users[userName].password !== password) {
     res.send({ okay: false, message: 'Incorrect password' });
   } else {
-    res.send({ okay: true, message: 'Successful login' });
+    res.send({ okay: true, userName, message: 'Successful login' });
   }
 });
 
 app.post('/api/signup', (req, res) => {
   const { userName, password } = req.body;
+
   if (users.hasOwnProperty(userName)) {
     res.send({ okay: false, message: 'User already exists' });
   } else {
-    users[userName] = { password, id: usersId };
+    const id = `u-${usersId}`;
     usersId++;
-    res.send({ okay: true, message: 'User created' });
+    users[userName] = { password, id };
+    res.send({ okay: true, userName, id, message: 'User created' });
   }
 });
 
 app.post('/api/create', (req, res) => {
-  const { userName, feedback } = req.body;
-  console.log('feedback in server.js:', feedback);
-  if (feedback.hasOwnProperty(userName)) {
-    feedback[userName].push(feedback);
-  } else {
-    feedback[userName] = [feedback];
-  }
+  const { userName, text } = req.body;
+  const entity = {
+    text,
+    date: new Date(),
+    id: `fb-${feedbackId}`,
+  };
+  feedbackId++;
 
-  res.send({ okay: true, message: 'Feedback created' });
+  if (feedback.hasOwnProperty(userName)) {
+    feedback[userName].push(entity);
+  } else {
+    feedback[userName] = [entity];
+  }
+  res.send({ okay: true, entity, message: 'Feedback created' });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

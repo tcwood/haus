@@ -4,13 +4,13 @@ import Button from '@material-ui/core/Button';
 
 class Create extends Component {
   state = {
-    feedback: '',
+    text: '',
   };
 
   handleFeedbackChange = e => {
     console.log('e.target.value in create.js:', e.target.value);
     this.setState({
-      feedback: e.target.value,
+      text: e.target.value,
     });
   };
 
@@ -22,7 +22,8 @@ class Create extends Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        feedback: this.state.feedback,
+        text: this.state.text,
+        userName: this.props.userName,
       }),
     });
     return await res.json();

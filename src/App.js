@@ -10,10 +10,16 @@ import './App.css';
 class App extends Component {
   state = {
     isLoggedIn: false,
+    userName: null,
   };
   setLoginState = isLoggedIn => {
     this.setState({
       isLoggedIn,
+    });
+  };
+  setUserName = userName => {
+    this.setState({
+      userName,
     });
   };
   render() {
@@ -39,6 +45,7 @@ class App extends Component {
             path="/create"
             isLoggedIn={this.state.isLoggedIn}
             component={Create}
+            userName={this.state.userName}
           />
           <PrivateRoute
             path="/view"
@@ -48,7 +55,11 @@ class App extends Component {
           <Route
             path="/login"
             render={props => (
-              <Login setLoginState={this.setLoginState} {...props} />
+              <Login
+                setLoginState={this.setLoginState}
+                setUserName={this.setUserName}
+                {...props}
+              />
             )}
           />
         </div>

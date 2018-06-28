@@ -30,7 +30,8 @@ class Login extends Component {
     const res = await this.sendUserInfo('signup');
     if (res.okay) {
       this.props.setLoginState(true);
-      this.props.history.push('/view');
+      this.props.setUserName(res.userName);
+      this.props.history.push('/create');
     } else {
       // TODO: trigger error modal here
       console.log('couldnt signup', res);
@@ -43,7 +44,8 @@ class Login extends Component {
     console.log('res', res);
     if (res.okay) {
       this.props.setLoginState(true);
-      this.props.history.push('/view');
+      this.props.setUserName(res.userName);
+      this.props.history.push('/create');
     } else {
       // TODO: trigger error modal here
       console.log('couldnt log in', res);
