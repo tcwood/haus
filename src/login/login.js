@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import sha1 from 'sha1';
-import UserPass from '../shared/userPass';
+import UserPass from './userPass';
 
 const initialState = {
   password: '',
