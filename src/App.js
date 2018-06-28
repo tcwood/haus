@@ -39,7 +39,7 @@ class App extends Component {
     return (
       <Router>
         <div className={classes.container}>
-          {isLoggedIn && <Nav />}
+          {isLoggedIn && <Nav setLoginState={this.setLoginState} />}
           <Route
             exact
             path="/"

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -7,7 +8,15 @@ class Nav extends Component {
     value: 0,
   };
   handleChange = (event, value) => {
+    const { history, setLoginState } = this.props;
     this.setState({ value });
+    if (value === 0) {
+      history.push('/create');
+    } else if (value === 1) {
+      history.push('/history');
+    } else if (value === 2) {
+      setLoginState(false);
+    }
   };
   render() {
     return (
@@ -26,4 +35,4 @@ class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);

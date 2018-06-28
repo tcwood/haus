@@ -21,6 +21,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: 100,
   },
   buttonContainer: {
     display: 'flex',
@@ -49,7 +50,6 @@ const userPass = ({
 }) => {
   return (
     <div className={classes.container}>
-      <h1>Login</h1>
       <FormControl>
         <InputLabel>User Name</InputLabel>
         <Input
