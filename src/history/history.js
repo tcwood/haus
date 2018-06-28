@@ -5,7 +5,18 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { get } from '../utils/http';
 
-const styles = {};
+const styles = {
+  container: {
+    width: '100%',
+    marginTop: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  card: {
+    width: '80%',
+  },
+};
 
 class History extends Component {
   state = {
@@ -29,22 +40,23 @@ class History extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.container}>
         {this.state.feedback.length === 0 ? (
-          <Card>
+          <Card className={classes.card}>
             <CardContent>
               <Typography color="textSecondary">
                 Looks like you haven't submitted any feedback yet. Get started
-                by clicking the create button.
+                by clicking the create tab.
               </Typography>
             </CardContent>
           </Card>
         ) : (
           this.state.feedback.map(({ date, text, id, userName }) => {
             return (
-              <Card key={id}>
-                <CardContent>
+              <Card key={id} className={classes.card}>
+                <CardContent className={classes.card}>
                   <Typography color="textSecondary" paragraph={true}>
                     {text}
                   </Typography>
