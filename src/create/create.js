@@ -21,8 +21,10 @@ class Create extends Component {
       userName: this.props.userName,
     });
 
-    const { res } = await post(url, body);
-    return res;
+    const { json } = await post(url, body);
+    if (json.okay) {
+      this.props.history.push('/view');
+    }
   };
 
   render() {

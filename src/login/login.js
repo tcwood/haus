@@ -27,33 +27,6 @@ class Login extends Component {
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  onSignup = async () => {
-    const res = await this.sendUserInfo('signup');
-    if (res.okay) {
-      this.props.setLoginState(true);
-      this.props.setUserName(res.userName);
-      this.props.history.push('/create');
-    } else {
-      // TODO: trigger error modal here
-      console.log('couldnt signup', res);
-      this.resetInitialState();
-    }
-  };
-
-  onLogin = async () => {
-    const res = await this.sendUserInfo('login');
-    console.log('res', res);
-    if (res.okay) {
-      this.props.setLoginState(true);
-      this.props.setUserName(res.userName);
-      this.props.history.push('/create');
-    } else {
-      // TODO: trigger error modal here
-      console.log('couldnt log in', res);
-      this.resetInitialState();
-    }
-  };
-
   sendUserInfo = async endpoint => {
     const { userName, password } = this.state;
     const hashedPassword = sha1(password + 'salty');
@@ -63,7 +36,15 @@ class Login extends Component {
       password: hashedPassword,
     });
     const { json } = await post(url, body);
-    return json;
+    if (json.okay) {
+      this.props.setLoginState(true);
+      this.props.setUserName(json.userName);
+      this.props.history.push('/create');
+    } else {
+      // TODO: trigger error modal here
+      console.log('couldnt log in', json);
+      this.resetInitialState();
+    }
   };
 
   render() {
@@ -71,8 +52,8 @@ class Login extends Component {
       <UserPass
         handleChange={this.handleChange}
         handleClickShowPassword={this.handleClickShowPassword}
-        onLogin={this.onLogin}
-        onSignup={this.onSignup}
+        onLogin={() => this.sendUserInfo('login')}
+        onSignup={() => this.sendUserInfo('signup')}
         password={this.state.password}
         showPassword={this.state.showPassword}
         userName={this.state.userName}

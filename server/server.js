@@ -21,7 +21,7 @@ app.get('/api/home', (req, res) => {
 app.get('/api/feedback', (req, res) => {
   const { userName } = req.query;
   const userFeedback = feedback[userName];
-  res.send({ feedback: userFeedback });
+  res.send({ okay: true, feedback: userFeedback });
 });
 
 app.post('/api/login', (req, res) => {
