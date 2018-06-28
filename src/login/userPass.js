@@ -14,10 +14,10 @@ const handleMouseDownPassword = event => {
   event.preventDefault();
 };
 
-const styles = () => ({
+const styles = {
   container: {
-    width: '300px',
-    height: '300px',
+    width: 300,
+    height: 300,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -35,7 +35,7 @@ const styles = () => ({
     margin: '10px 0',
     width: '40%',
   },
-});
+};
 
 const userPass = ({
   classes,

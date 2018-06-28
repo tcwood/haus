@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { post } from '../utils/http';
+
+const styles = () => ({
+  container: {
+    height: '70vh',
+    width: 300,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  feedback: {
+    height: 300,
+  },
+});
 
 class Create extends Component {
   state = {
@@ -28,12 +42,13 @@ class Create extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.container}>
         <h1>Create</h1>
         <TextField
           id="feedback"
-          label="Feedback"
+          label="Enter Feedback"
           onChange={this.handleFeedbackChange}
           placeholder="Enter your feedback here"
           multiline
@@ -51,4 +66,4 @@ class Create extends Component {
   }
 }
 
-export default Create;
+export default withStyles(styles)(Create);

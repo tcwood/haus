@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Create from './create/create';
 import Home from './home/home';
@@ -8,7 +8,7 @@ import PrivateRoute from './shared/privateRoute';
 import View from './view/view';
 import './App.css';
 
-const styles = () => ({
+const styles = {
   container: {
     height: '100vh',
     width: '100%',
@@ -17,7 +17,7 @@ const styles = () => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+};
 class App extends Component {
   state = {
     isLoggedIn: false,
