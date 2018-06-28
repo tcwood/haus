@@ -41,7 +41,7 @@ class Create extends Component {
 
     const { json } = await post(url, body);
     if (json.okay) {
-      this.props.history.push('/view');
+      this.props.history.push('/history');
     }
   };
 

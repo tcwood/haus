@@ -6,7 +6,7 @@ import Create from './create/create';
 import Home from './home/home';
 import Login from './login/login';
 import PrivateRoute from './shared/privateRoute';
-import View from './view/view';
+import History from './history/history';
 import './App.css';
 
 const styles = {
@@ -49,9 +49,9 @@ class App extends Component {
             userName={userName}
           />
           <PrivateRoute
-            path="/view"
+            path="/history"
             isLoggedIn={isLoggedIn}
-            component={View}
+            component={History}
             userName={userName}
           />
           <Route

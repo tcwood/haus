@@ -7,7 +7,7 @@ import { get } from '../utils/http';
 
 const styles = {};
 
-class View extends Component {
+class History extends Component {
   state = {
     feedback: [],
   };
@@ -61,4 +61,4 @@ class View extends Component {
     );
   }
 }
-export default withStyles(styles)(View);
+export default withStyles(styles)(History);
