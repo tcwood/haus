@@ -33,24 +33,31 @@ class Login extends Component {
 
   sendUserInfo = async endpoint => {
     const { userName, password } = this.state;
-    const hashedPassword = sha1(password + 'salty');
-    const url = `/api/${endpoint}`;
-    const body = JSON.stringify({
-      userName,
-      password: hashedPassword,
-    });
-    const { json } = await post(url, body);
-    if (json.okay) {
-      this.props.setLoginState(true);
-      this.props.setUserName(json.userName);
-      this.props.history.push('/create');
-    } else {
+    if (userName === '' || password === '') {
       this.setState({
-        userName: '',
         modalIsOpen: true,
-        password: '',
-        errorMessage: json.message,
+        errorMessage: 'Username and password must contain some characters',
       });
+    } else {
+      const hashedPassword = sha1(password + 'salty');
+      const url = `/api/${endpoint}`;
+      const body = JSON.stringify({
+        userName,
+        password: hashedPassword,
+      });
+      const { json } = await post(url, body);
+      if (json.okay) {
+        this.props.setLoginState(true);
+        this.props.setUserName(json.userName);
+        this.props.history.push('/create');
+      } else {
+        this.setState({
+          userName: '',
+          modalIsOpen: true,
+          password: '',
+          errorMessage: json.message,
+        });
+      }
     }
   };
 

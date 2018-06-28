@@ -29,7 +29,6 @@ class Nav extends Component {
     }
   };
   setActiveTab = value => {
-    console.log(' in nav.js:');
     this.setState({
       value,
     });
