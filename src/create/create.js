@@ -4,23 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { post } from '../utils/http';
 
-const styles = () => ({
-  container: {
-    height: '70%',
-    width: '70%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  feedback: {
-    width: '80%',
-  },
-  button: {
-    marginTop: 60,
-  },
-});
-
 class Create extends Component {
   state = {
     text: '',
@@ -70,5 +53,22 @@ class Create extends Component {
     );
   }
 }
+
+const styles = () => ({
+  container: {
+    height: '70%',
+    width: '70%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  feedback: {
+    width: '80%',
+  },
+  button: {
+    marginTop: 60,
+  },
+});
 
 export default withStyles(styles)(Create);

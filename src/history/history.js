@@ -5,19 +5,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { get } from '../utils/http';
 
-const styles = {
-  container: {
-    width: '100%',
-    marginTop: 20,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  card: {
-    width: '80%',
-  },
-};
-
 class History extends Component {
   state = {
     feedback: [],
@@ -72,4 +59,18 @@ class History extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    width: '100%',
+    marginTop: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  card: {
+    width: '80%',
+  },
+};
+
 export default withStyles(styles)(History);

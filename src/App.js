@@ -8,16 +8,6 @@ import PrivateRoute from './shared/privateRoute';
 import History from './history/history';
 import './App.css';
 
-const styles = {
-  container: {
-    height: '80%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: 200,
-  },
-};
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -78,5 +68,16 @@ class App extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    height: '80%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 200,
+  },
+};
 
 export default withStyles(styles)(App);

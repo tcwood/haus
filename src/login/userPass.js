@@ -14,30 +14,6 @@ const handleMouseDownPassword = event => {
   event.preventDefault();
 };
 
-const styles = {
-  container: {
-    width: 300,
-    height: 300,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: 100,
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  textField: {
-    width: 300,
-    margin: '30px 0',
-  },
-  button: {
-    margin: '10px 0',
-    width: '40%',
-  },
-};
-
 const userPass = ({
   classes,
   handleChange,
@@ -112,6 +88,30 @@ userPass.propTypes = {
   password: string.isRequired,
   showPassword: bool.isRequired,
   userName: string.isRequired,
+};
+
+const styles = {
+  container: {
+    width: 300,
+    height: 300,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 100,
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  textField: {
+    width: 300,
+    margin: '30px 0',
+  },
+  button: {
+    margin: '10px 0',
+    width: '40%',
+  },
 };
 
 export default withStyles(styles)(userPass);
