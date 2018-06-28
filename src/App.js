@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Nav from './shared/nav';
 import Create from './create/create';
-import Home from './home/home';
 import Login from './login/login';
 import PrivateRoute from './shared/privateRoute';
 import History from './history/history';
@@ -41,7 +40,17 @@ class App extends Component {
       <Router>
         <div className={classes.container}>
           {isLoggedIn && <Nav />}
-          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/"
+            render={() =>
+              isLoggedIn ? (
+                <Redirect to={{ pathname: '/create' }} />
+              ) : (
+                <Redirect to={{ pathname: '/login' }} />
+              )
+            }
+          />
           <PrivateRoute
             path="/create"
             isLoggedIn={isLoggedIn}
