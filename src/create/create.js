@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { post, postSlack } from '../utils/http';
+import { post } from '../utils/http';
 
 class Create extends Component {
   state = {
@@ -24,14 +24,6 @@ class Create extends Component {
 
     const { json } = await post(url, body);
     if (json.okay) {
-      // try {
-      //   const slackUrl =
-      //     'https://hooks.slack.com/services/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';
-      //   let slack = await postSlack(slackUrl, body);
-      //   console.log('slack', slack);
-      // } catch (e) {
-      //   console.log('error posting to slack', e);
-      // }
       this.props.history.push('/history');
     }
   };

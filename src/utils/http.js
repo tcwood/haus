@@ -16,15 +16,3 @@ export async function post(url, body) {
   const json = await res.json();
   return { res, json };
 }
-
-export async function postSlack(url, body) {
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body,
-  });
-  const json = await res.json();
-  return { res, json };
-}

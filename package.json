@@ -24,7 +24,8 @@
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "sha1": "^1.1.1"
+    "sha1": "^1.1.1",
+    "shelljs": "^0.8.2"
   },
   "devDependencies": {
     "concurrently": "^3.6.0"
