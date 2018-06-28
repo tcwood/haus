@@ -19,7 +19,9 @@ app.get('/api/home', (req, res) => {
 });
 
 app.get('/api/feedback', (req, res) => {
-  res.send({ feedback: sampleData });
+  const { userName } = req.query;
+  const userFeedback = feedback[userName];
+  res.send({ feedback: userFeedback });
 });
 
 app.post('/api/login', (req, res) => {
@@ -49,9 +51,10 @@ app.post('/api/signup', (req, res) => {
 app.post('/api/create', (req, res) => {
   const { userName, text } = req.body;
   const entity = {
-    text,
     date: new Date(),
     id: `fb-${feedbackId}`,
+    text,
+    userName,
   };
   feedbackId++;
 

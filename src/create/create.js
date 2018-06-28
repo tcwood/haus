@@ -8,7 +8,6 @@ class Create extends Component {
   };
 
   handleFeedbackChange = e => {
-    console.log('e.target.value in create.js:', e.target.value);
     this.setState({
       text: e.target.value,
     });

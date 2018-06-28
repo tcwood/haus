@@ -8,7 +8,7 @@ const styles = {};
 
 class View extends Component {
   state = {
-    feedback: null,
+    feedback: [],
   };
 
   componentDidMount() {
@@ -18,7 +18,9 @@ class View extends Component {
   }
 
   fetchFeedback = async () => {
-    const response = await fetch('/api/feedback');
+    const response = await fetch(
+      `/api/feedback?userName=${this.props.userName}`
+    );
     const body = await response.json();
     if (response.status !== 200) {
       throw Error('Yikess! something went wrong>>>', body.message);
@@ -31,15 +33,17 @@ class View extends Component {
       <div>
         <h1>View</h1>
         {this.state.feedback &&
-          this.state.feedback.map(({ date, feedback, id, userName }) => {
+          this.state.feedback.map(({ date, text, id, userName }) => {
             return (
               <Card key={id}>
                 <CardContent>
                   <Typography color="textSecondary">{userName}</Typography>
                   <Typography color="textSecondary" paragraph={true}>
-                    {feedback}
+                    {text}
                   </Typography>
-                  <Typography color="textSecondary">{date}</Typography>
+                  <Typography color="textSecondary">
+                    {new Date(date).toDateString()}
+                  </Typography>
                 </CardContent>
               </Card>
             );

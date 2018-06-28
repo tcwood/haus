@@ -51,6 +51,7 @@ class App extends Component {
             path="/view"
             isLoggedIn={this.state.isLoggedIn}
             component={View}
+            userName={this.state.userName}
           />
           <Route
             path="/login"
