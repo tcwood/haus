@@ -11,7 +11,7 @@ module.exports = (req, res, feedback) => {
   feedbackId++;
 
   if (feedback.hasOwnProperty(userName)) {
-    feedback[userName].push(entity);
+    feedback[userName].unshift(entity);
   } else {
     feedback[userName] = [entity];
   }
