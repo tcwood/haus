@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import Nav from './shared/nav';
 import Create from './create/create';
 import Home from './home/home';
 import Login from './login/login';
@@ -10,12 +11,12 @@ import './App.css';
 
 const styles = {
   container: {
-    height: '100vh',
+    height: '80%',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 200,
   },
 };
 class App extends Component {
@@ -35,21 +36,23 @@ class App extends Component {
   };
   render() {
     const { classes } = this.props;
+    const { isLoggedIn, userName } = this.state;
     return (
       <Router>
         <div className={classes.container}>
+          {isLoggedIn && <Nav />}
           <Route exact path="/" component={Home} />
           <PrivateRoute
             path="/create"
-            isLoggedIn={this.state.isLoggedIn}
+            isLoggedIn={isLoggedIn}
             component={Create}
-            userName={this.state.userName}
+            userName={userName}
           />
           <PrivateRoute
             path="/view"
-            isLoggedIn={this.state.isLoggedIn}
+            isLoggedIn={isLoggedIn}
             component={View}
-            userName={this.state.userName}
+            userName={userName}
           />
           <Route
             path="/login"

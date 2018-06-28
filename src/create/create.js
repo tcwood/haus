@@ -6,15 +6,19 @@ import { post } from '../utils/http';
 
 const styles = () => ({
   container: {
-    height: '70vh',
-    width: 300,
+    height: '70%',
+    width: '70%',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: 20,
   },
   feedback: {
-    height: 300,
+    height: '60%',
+    width: '80%',
   },
+  button: {},
 });
 
 class Create extends Component {
@@ -45,9 +49,9 @@ class Create extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <h1>Create</h1>
         <TextField
           id="feedback"
+          className={classes.feedback}
           label="Enter Feedback"
           onChange={this.handleFeedbackChange}
           placeholder="Enter your feedback here"
