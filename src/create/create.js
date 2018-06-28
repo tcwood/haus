@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { post } from '../utils/http';
 
 class Create extends Component {
   state = {
@@ -14,19 +15,16 @@ class Create extends Component {
   };
 
   submitFeedback = async () => {
-    const res = await fetch(`/api/create`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        text: this.state.text,
-        userName: this.props.userName,
-      }),
+    const url = `/api/create`;
+    const body = JSON.stringify({
+      text: this.state.text,
+      userName: this.props.userName,
     });
-    return await res.json();
+
+    const { res } = await post(url, body);
+    return res;
   };
+
   render() {
     return (
       <div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import sha1 from 'sha1';
 import UserPass from './userPass';
+import { post } from '../utils/http';
 
 const initialState = {
   password: '',
@@ -56,18 +57,13 @@ class Login extends Component {
   sendUserInfo = async endpoint => {
     const { userName, password } = this.state;
     const hashedPassword = sha1(password + 'salty');
-    const res = await fetch(`/api/${endpoint}`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userName,
-        password: hashedPassword,
-      }),
+    const url = `/api/${endpoint}`;
+    const body = JSON.stringify({
+      userName,
+      password: hashedPassword,
     });
-    return await res.json();
+    const { json } = await post(url, body);
+    return json;
   };
 
   render() {

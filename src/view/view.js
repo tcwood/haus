@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { get } from '../utils/http';
 
 const styles = {};
 
@@ -18,16 +19,15 @@ class View extends Component {
   }
 
   fetchFeedback = async () => {
-    const response = await fetch(
+    const { res, json } = await get(
       `/api/feedback?userName=${this.props.userName}`
     );
-    const body = await response.json();
-    if (response.status !== 200) {
-      throw Error('Yikess! something went wrong>>>', body.message);
+    if (res.status !== 200) {
+      throw Error('Yikess! something went wrong>>>', json.message);
     }
-
-    return body;
+    return json;
   };
+
   render() {
     return (
       <div>
