@@ -14,9 +14,31 @@ const handleMouseDownPassword = event => {
   event.preventDefault();
 };
 
-const styles = () => ({});
+const styles = () => ({
+  container: {
+    width: '300px',
+    height: '300px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  textField: {
+    width: 300,
+    margin: '30px 0',
+  },
+  button: {
+    margin: '10px 0',
+    width: '40%',
+  },
+});
 
 const userPass = ({
+  classes,
   handleChange,
   handleClickShowPassword,
   onLogin,
@@ -24,40 +46,61 @@ const userPass = ({
   password,
   showPassword,
   userName,
-}) => (
-  <div>
-    <h1>Login</h1>
-    <FormControl>
-      <InputLabel>User Name</InputLabel>
-      <Input value={userName} onChange={handleChange('userName')} />
-    </FormControl>
-    <FormControl>
-      <InputLabel>Password</InputLabel>
-      <Input
-        type={showPassword ? 'text' : 'password'}
-        value={password}
-        onChange={handleChange('password')}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="Toggle password visibility"
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        }
-      />
-    </FormControl>
-    <Button onClick={onLogin} size="large" variant="contained" color="primary">
-      Log in
-    </Button>
-    <Button onClick={onSignup} size="large" variant="contained" color="primary">
-      Sign Up
-    </Button>
-  </div>
-);
+}) => {
+  return (
+    <div className={classes.container}>
+      <h1>Login</h1>
+      <FormControl>
+        <InputLabel>User Name</InputLabel>
+        <Input
+          className={classes.textField}
+          value={userName}
+          onChange={handleChange('userName')}
+        />
+      </FormControl>
+      <FormControl>
+        <InputLabel>Password</InputLabel>
+        <Input
+          className={classes.textField}
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          onChange={handleChange('password')}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="Toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
+      <div className={classes.buttonContainer}>
+        <Button
+          className={classes.button}
+          onClick={onLogin}
+          size="large"
+          variant="contained"
+          color="primary"
+        >
+          Log in
+        </Button>
+        <Button
+          className={classes.button}
+          onClick={onSignup}
+          size="large"
+          variant="contained"
+          color="primary"
+        >
+          Sign Up
+        </Button>
+      </div>
+    </div>
+  );
+};
 
 const { bool, func, string } = PropTypes;
 

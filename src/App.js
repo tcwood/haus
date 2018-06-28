@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 import Create from './create/create';
 import Home from './home/home';
 import Login from './login/login';
@@ -7,6 +8,16 @@ import PrivateRoute from './shared/privateRoute';
 import View from './view/view';
 import './App.css';
 
+const styles = () => ({
+  container: {
+    height: '100vh',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 class App extends Component {
   state = {
     isLoggedIn: false,
@@ -23,23 +34,10 @@ class App extends Component {
     });
   };
   render() {
+    const { classes } = this.props;
     return (
       <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Log in</Link>
-            </li>
-            <li>
-              <Link to="/create">Create</Link>
-            </li>
-            <li>
-              <Link to="/view">View</Link>
-            </li>
-          </ul>
+        <div className={classes.container}>
           <Route exact path="/" component={Home} />
           <PrivateRoute
             path="/create"
@@ -69,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
