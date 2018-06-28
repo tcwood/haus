@@ -3,20 +3,24 @@ import sha1 from 'sha1';
 import UserPass from './userPass';
 import { post } from '../utils/http';
 
-const initialState = {
-  password: '',
-  showPassword: false,
-  userName: '',
-};
 class Login extends Component {
-  state = initialState;
-
-  resetInitialState = () => {
-    this.setState(initialState);
+  state = {
+    errorMessage: '',
+    modalIsOpen: false,
+    password: '',
+    showPassword: false,
+    userName: '',
   };
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
+  };
+
+  handleModalClose = () => {
+    this.setState({
+      modalIsOpen: false,
+      errorMessage: '',
+    });
   };
 
   handleMouseDownPassword = event => {
@@ -41,17 +45,23 @@ class Login extends Component {
       this.props.setUserName(json.userName);
       this.props.history.push('/create');
     } else {
-      // TODO: trigger error modal here
-      console.log('couldnt log in', json);
-      this.resetInitialState();
+      this.setState({
+        userName: '',
+        modalIsOpen: true,
+        password: '',
+        errorMessage: json.message,
+      });
     }
   };
 
   render() {
     return (
       <UserPass
+        errorMessage={this.state.errorMessage}
         handleChange={this.handleChange}
+        handleModalClose={this.handleModalClose}
         handleClickShowPassword={this.handleClickShowPassword}
+        modalIsOpen={this.state.modalIsOpen}
         onLogin={() => this.sendUserInfo('login')}
         onSignup={() => this.sendUserInfo('signup')}
         password={this.state.password}

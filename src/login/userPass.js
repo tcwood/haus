@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
@@ -16,8 +20,11 @@ const handleMouseDownPassword = event => {
 
 const userPass = ({
   classes,
+  errorMessage,
   handleChange,
   handleClickShowPassword,
+  handleModalClose,
+  modalIsOpen,
   onLogin,
   onSignup,
   password,
@@ -74,6 +81,18 @@ const userPass = ({
           Sign Up
         </Button>
       </div>
+      <Dialog open={modalIsOpen} onClose={handleModalClose}>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {errorMessage}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleModalClose} color="primary">
+            Okay
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
@@ -83,6 +102,8 @@ const { bool, func, string } = PropTypes;
 userPass.propTypes = {
   handleChange: func.isRequired,
   handleClickShowPassword: func.isRequired,
+  handleModalClose: func.isRequired,
+  modalIsOpen: bool.isRequired,
   onLogin: func.isRequired,
   onSignup: func.isRequired,
   password: string.isRequired,
@@ -111,6 +132,10 @@ const styles = {
   button: {
     margin: '10px 0',
     width: '40%',
+  },
+  modal: {
+    width: 200,
+    height: 200,
   },
 };
 
